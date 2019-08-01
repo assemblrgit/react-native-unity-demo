@@ -48,6 +48,11 @@ public class Build : MonoBehaviour
         build_text = build_text.Replace("implementation fileTree(dir: 'libs', include: ['*.jar'])", "api fileTree(include: ['*.jar'], dir: 'libs')");
         // build_text = build_text.Replace("implementation(name: 'VuforiaWrapper', ext:'aar')", "api(name: 'VuforiaWrapper', ext: 'aar')");
 		build_text = Regex.Replace(build_text, @"\n.*applicationId '.+'.*\n", "\n");
+
+        build_text = build_text.Replace("bundle {", "splits {");
+        build_text = build_text.Replace("enableSplit = false", "enable false");
+        build_text = build_text.Replace("enableSplit = true", "enable true");
+        
 		File.WriteAllText(build_file, build_text);
 
         // Modify AndroidManifest.xml
